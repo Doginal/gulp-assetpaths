@@ -40,7 +40,8 @@
     },
     { exp : /((<\s*){0,1}\bimg)(.*?)\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
       captureGroup : 4,
-      templateCheck : /(<\s*){0,1}(\bimg)(.*?)\bsrc\s*=\s*/
+      templateCheck : /(<\s*){0,1}(\bimg)(.*?)[^ng\-]\bsrc\s*=\s*/
+      //templateCheck : /(<\s*){0,1}(\bimg)(.*?)\bsrc\s*=\s*/
     },
     { exp: /(:\s*("(.*?)"))/gi,
       captureGroup : 2,
