@@ -25,28 +25,56 @@
 
    var filetypes = new RegExp('.' + opts.filetypes.join('|.'));
    var rootRegEx = setReplacementDomain(opts.oldDomain);
-   var attrsAndProps = [
-    { exp : /(<\s*)(.*?)\bhref\s*=\s*((["{0,1}|'{0,1}]).*?\4)(.*?)>/gi,
-      captureGroup : 3,
-      templateCheck : /((\bdownload)(?=(.*?)\bhref\s*=))|((\bhref\s*=)(?=(.*?)\bdownload))/
-    },
-    { exp : /((\bbackground|\bbackground-image)\s*:\s*?.*){0,1}\burl\s*((\(\s*[^\w]{0,1}(["{0,1}'{0,1}]{0,1})).*?\5\))/gi,
-      captureGroup : 3,
-      templateCheck : /((\bbackground|\bbackground-image)\s*:\s*?.*)\burl\s*\(.*?\)/
-    },
-    { exp : /((<\s*){0,1}\bscript)(.*?)\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
-      captureGroup : 4,
-      templateCheck : /(<\s*){0,1}(\bscript)(.*?)\bsrc\s*=\s*/
-    },
-    { exp : /((<\s*){0,1}\bimg)(.*?)[^ng\-]\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
-      captureGroup : 4,
-      templateCheck : /(<\s*){0,1}(\bimg)(.*?)[^ng\-]\bsrc\s*=\s*/
-      //templateCheck : /(<\s*){0,1}(\bimg)(.*?)\bsrc\s*=\s*/
-    },
-    { exp: /(:\s*("(.*?)"))/gi,
-      captureGroup : 2,
-      templateCheck: false
-    }];
+   opts.ng = false;
+  if(opts.ng){
+    //AngularJs is in use, dont rewrite ng-src
+    var attrsAndProps = [
+      { exp : /(<\s*)(.*?)\bhref\s*=\s*((["{0,1}|'{0,1}]).*?\4)(.*?)>/gi,
+        captureGroup : 3,
+        templateCheck : /((\bdownload)(?=(.*?)\bhref\s*=))|((\bhref\s*=)(?=(.*?)\bdownload))/
+      },
+      { exp : /((\bbackground|\bbackground-image)\s*:\s*?.*){0,1}\burl\s*((\(\s*[^\w]{0,1}(["{0,1}'{0,1}]{0,1})).*?\5\))/gi,
+        captureGroup : 3,
+        templateCheck : /((\bbackground|\bbackground-image)\s*:\s*?.*)\burl\s*\(.*?\)/
+      },
+      { exp : /((<\s*){0,1}\bscript)(.*?)\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
+        captureGroup : 4,
+        templateCheck : /(<\s*){0,1}(\bscript)(.*?)\bsrc\s*=\s*/
+      },
+
+      { exp : /((<\s*){0,1}\bimg)(.*?)[^ng\-]\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
+        captureGroup : 4,
+        templateCheck : /(<\s*){0,1}(\bimg)(.*?)[^ng\-]\bsrc\s*=\s*/
+      },
+      { exp: /(:\s*("(.*?)"))/gi,
+        captureGroup : 2,
+        templateCheck: false
+      }];
+  }
+  else {
+    // AngularJs in use!
+    var attrsAndProps = [
+      { exp : /(<\s*)(.*?)\bhref\s*=\s*((["{0,1}|'{0,1}]).*?\4)(.*?)>/gi,
+        captureGroup : 3,
+        templateCheck : /((\bdownload)(?=(.*?)\bhref\s*=))|((\bhref\s*=)(?=(.*?)\bdownload))/
+      },
+      { exp : /((\bbackground|\bbackground-image)\s*:\s*?.*){0,1}\burl\s*((\(\s*[^\w]{0,1}(["{0,1}'{0,1}]{0,1})).*?\5\))/gi,
+        captureGroup : 3,
+        templateCheck : /((\bbackground|\bbackground-image)\s*:\s*?.*)\burl\s*\(.*?\)/
+      },
+      { exp : /((<\s*){0,1}\bscript)(.*?)\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
+        captureGroup : 4,
+        templateCheck : /(<\s*){0,1}(\bscript)(.*?)\bsrc\s*=\s*/
+      },
+      { exp : /((<\s*){0,1}\bimg)(.*?)\bsrc\s*=\s*((["{0,1}|'{0,1}]).*?\5)/gi,
+        captureGroup : 4,
+        templateCheck : /(<\s*){0,1}(\bimg)(.*?)\bsrc\s*=\s*/
+      },
+      { exp: /(:\s*("(.*?)"))/gi,
+        captureGroup : 2,
+        templateCheck: false
+      }];
+  }
  function setReplacementDomain(string){
   if(isRelative(opts.oldDomain)){
     return new RegExp('(((\\bhttp\|\\bhttps):){0,1}\\/\\/' + string + ')');

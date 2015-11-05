@@ -50,6 +50,9 @@ tags that have a href attribute with a download attribute in the same tag
 
 Array of filetypes to change the path for. 
 
+### options.ng - boolean (false by default)
+
+Disable rewriting ng-src when using angularjs html template files
 
 ## Use
 
