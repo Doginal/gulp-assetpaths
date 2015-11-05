@@ -1,6 +1,8 @@
 gulp-assetpaths
 ===============
 
+Fork for angularjs to disregard ng-src
+
 Change paths of assets from one environment to another
 Works for anything included with href, src, or url attributes
 
