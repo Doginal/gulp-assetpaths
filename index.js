@@ -29,7 +29,6 @@
    opts.ng = false;
 
   if(opts.ng){
-    console.log('opts.ng! ', opts.ng);
     //AngularJs is in use, dont rewrite ng-src
     var attrsAndProps = [
       { exp : /(<\s*)(.*?)\bhref\s*=\s*((["{0,1}|'{0,1}]).*?\4)(.*?)>/gi,
@@ -78,6 +77,10 @@
         templateCheck: false
       }];
   }
+  function attrsNprops() {
+    return attrsAndProps.length;  
+  }
+  
  function setReplacementDomain(string){
   if(isRelative(opts.oldDomain)){
     return new RegExp('(((\\bhttp\|\\bhttps):){0,1}\\/\\/' + string + ')');
@@ -201,5 +204,6 @@
    this.push(outfile);
    return callback();
  }
+ gtuil.log('length',attrsNprops());
  return through.obj(assetpaths);
 };
