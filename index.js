@@ -25,7 +25,7 @@
 
    var filetypes = new RegExp('.' + opts.filetypes.join('|.'));
    var rootRegEx = setReplacementDomain(opts.oldDomain);
-   opts.ng = false;
+   // opts.ng = false;
 
   if(opts.ng){
     //AngularJs is in use, dont rewrite ng-src
