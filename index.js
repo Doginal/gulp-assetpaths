@@ -25,7 +25,6 @@
 
    var filetypes = new RegExp('.' + opts.filetypes.join('|.'));
    var rootRegEx = setReplacementDomain(opts.oldDomain);
-   console.log('opts! ', opts);
    opts.ng = false;
 
   if(opts.ng){
@@ -52,6 +51,7 @@
         captureGroup : 2,
         templateCheck: false
       }];
+      gutil.log('AngularJs is on!');
   }
   else {
     // AngularJs in use!
@@ -76,6 +76,7 @@
         captureGroup : 2,
         templateCheck: false
       }];
+      gutil.log('AngularJs is off!');
   }
   function attrsNprops() {
     return attrsAndProps.length;  
@@ -204,6 +205,5 @@
    this.push(outfile);
    return callback();
  }
- gutil.log('length',attrsNprops());
  return through.obj(assetpaths);
 };
