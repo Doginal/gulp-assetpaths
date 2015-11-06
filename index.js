@@ -204,6 +204,6 @@
    this.push(outfile);
    return callback();
  }
- gtuil.log('length',attrsNprops());
+ gutil.log('length',attrsNprops());
  return through.obj(assetpaths);
 };
