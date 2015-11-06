@@ -25,8 +25,11 @@
 
    var filetypes = new RegExp('.' + opts.filetypes.join('|.'));
    var rootRegEx = setReplacementDomain(opts.oldDomain);
+   console.log('opts! ', opts);
    opts.ng = false;
+
   if(opts.ng){
+    console.log('opts.ng! ', opts.ng);
     //AngularJs is in use, dont rewrite ng-src
     var attrsAndProps = [
       { exp : /(<\s*)(.*?)\bhref\s*=\s*((["{0,1}|'{0,1}]).*?\4)(.*?)>/gi,
